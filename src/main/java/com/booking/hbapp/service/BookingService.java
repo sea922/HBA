@@ -1,4 +1,4 @@
 package com.booking.hbapp.service;
 
-public class RoomServiceImpl {
+public class BookingService {
 }
