@@ -1,2 +1,4 @@
-package com.booking.hbapp.controller;public class RoomController {
+package com.booking.hbapp.controller;
+
+public class RoomController {
 }

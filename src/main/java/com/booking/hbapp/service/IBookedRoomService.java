@@ -1,2 +1,4 @@
-package com.booking.hbapp.service;public interface IBookedRoomService {
+package com.booking.hbapp.service;
+
+public interface IBookedRoomService {
 }

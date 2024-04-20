@@ -1,2 +1,4 @@
-package com.booking.hbapp.repository;public class RoomRepository {
+package com.booking.hbapp.repository;
+
+public interface RoomRepository {
 }

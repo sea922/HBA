@@ -1,2 +1,4 @@
-package com.booking.hbapp.response;public class BookedRoomResponse {
+package com.booking.hbapp.response;
+
+public class BookedRoomResponse {
 }
