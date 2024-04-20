@@ -1,5 +1,6 @@
 package com.booking.hbapp.service;
 
+import com.booking.hbapp.exception.InternalServerException;
 import com.booking.hbapp.exception.ResourceNotFoundException;
 import com.booking.hbapp.model.Room;
 import com.booking.hbapp.repository.RoomRepository;
@@ -42,6 +43,30 @@ public class RoomService implements IRoomService {
     public List<String> getAllRoomTypes() {
         return roomRepository.findDistinctRoomTypes();
     }
+
+    @Override
+    public void deleteRoom(Long roomId) {
+        Optional<Room> theRoom = roomRepository.findById(roomId);
+        if(theRoom.isPresent()){
+            roomRepository.deleteById(roomId);
+        }
+    }
+
+    @Override
+    public Room updateRoom(Long roomId, String roomTye, BigDecimal roomPrice, byte[] photoBytes) {
+        Room room = roomRepository.findById(roomId).get();
+        if(roomTye != null) room.setRoomType(roomTye);
+        if(roomPrice != null) room.setRoomPrice(roomPrice);
+        if(photoBytes != null && photoBytes.length > 0) {
+            try{
+                room.setPhoto(new SerialBlob(photoBytes));
+            }catch (SQLException ex){
+                throw new InternalServerException("Fail updating room");
+            }
+        }
+        return roomRepository.save(room);
+    }
+
 
 
     @Override
