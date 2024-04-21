@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.sql.Blob;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -72,6 +73,7 @@ public class RoomService implements IRoomService {
     @Override
     public byte[] getRoomPhotoByRoomId(Long roomId) throws SQLException {
         Optional<Room> theRoom = roomRepository.findById(roomId);
+        //exist or not
         if(theRoom.isEmpty()){
             throw new ResourceNotFoundException("Sorry, Room not found!");
         }
@@ -80,5 +82,15 @@ public class RoomService implements IRoomService {
             return photoBlob.getBytes(1, (int) photoBlob.length());
         }
         return null;
+    }
+
+    @Override
+    public List<Room> getAvailableRooms(LocalDate checkInDate, LocalDate checkOutDate, String roomType) {
+        return roomRepository.findAvailableRoomsByDatesAndType(checkInDate, checkOutDate, roomType);
+    }
+
+    @Override
+    public Optional<Room> getRoomById(Long roomId) {
+        return roomRepository.findById(roomId);
     }
 }
